@@ -1,5 +1,5 @@
 from django.db import models
-from django.contrib.auth.mixins import User
+from django.contrib.auth.models import User
 # Create your models here.
 class Confessions(models.Model):
     confession = models.CharField(max_length=1001,help_text="Enter your shhhhh.....!!")

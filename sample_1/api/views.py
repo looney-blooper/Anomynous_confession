@@ -6,16 +6,16 @@ from .models import Confessions
 from .forms import confession_form
 
 class home_page(View):
-    def get(request):
+    def get(self,request):
         model = Confessions
-        if request.user_is_authenticated():
-            template = "templates/loged_home.html"
+        if request.user.is_authenticated:
+            template = "home.html"
             my_comments = Confessions.objects.filter(user=request.user).order_by("-timestamp")
-            return render(request, template, {'comments':my_comments})
+            return render(request, template, {'confessions':my_comments})
         else:
-            template = "templates/home.html"
+            template = "home.html"
             confessions = Confessions.objects.all().order_by("-timestamp")
-            return render(request, template, {'confesions':confessions})
+            return render(request, template, {'confessions':confessions})
     
 
 class create_confession(LoginRequiredMixin, View):
@@ -52,6 +52,22 @@ class update_confession(LoginRequiredMixin, View):
         if not form.is_valid():
             ctx = {"form":form}
             return render(request, self.template, ctx)
-            form.save()
-        else:
-            redirect(self.success_url)
+        confession = form.save(commit=False)
+        confession.user = request.user
+        confession.save()
+        return redirect(self.success_url)
+
+class delete_confession(LoginRequiredMixin, View):
+    model = Confessions
+    template = "templates/confession_delete_form.html"
+    success_url = reverse_lazy("api:all")
+
+    def get(self, request, pk):
+        Confession = get_object_or_404(self.model, pk=pk)
+        ctx = {"confession":Confession}
+        return render(request, self.template, ctx)
+    
+    def post(self, request, pk):
+        confession = get_object_or_404(self.model, pk=pk)
+        confession.delete()
+        return redirect(self.success_url)

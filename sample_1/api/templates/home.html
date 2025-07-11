@@ -1,0 +1,20 @@
+{% extends "base_bootstrap.html" %}
+
+{% block content %}
+
+<h1>Confessions</h1>
+{% if confessions %}
+<ul>
+    {% for confession in confessions %}
+        <li>
+            {{ confession.confession }}
+            (<a href="{% url 'api:confession_update' confession.id %}">Update</a>
+            <a href="{% url 'api:confession_delete' confession.id %}">Delete</a>)
+        </li>
+    {% endfor %}
+</ul>
+{% else %}
+    <p>There no Confessions made...... Be the 1...by posting ur confession.....</p>
+{% endif %}
+<p><a href="{% url 'api:create_confession' %}">Make a confession</a></p>
+{% endblock %}

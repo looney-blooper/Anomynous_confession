@@ -1,7 +1,7 @@
 from django.forms import ModelForm
-from .models import Comments
+from .models import Confessions
 
 class confession_form(ModelForm):
     class meta:
-        model = Comments
+        model = Confessions
         fields = '__all__'
