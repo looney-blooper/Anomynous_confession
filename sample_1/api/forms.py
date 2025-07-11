@@ -2,6 +2,6 @@ from django.forms import ModelForm
 from .models import Confessions
 
 class confession_form(ModelForm):
-    class meta:
+    class Meta:
         model = Confessions
-        fields = '__all__'
+        fields = ['confession']

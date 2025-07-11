@@ -19,7 +19,7 @@ class home_page(View):
     
 
 class create_confession(LoginRequiredMixin, View):
-    template = "templates/confession_form.html"
+    template = "confession_form.html"
     success_url = reverse_lazy("api:all")
 
     def get(self, request):
@@ -32,13 +32,15 @@ class create_confession(LoginRequiredMixin, View):
         if not form.is_valid():
             ctx = {'form':form}
             return render(request, self.template, ctx)
-        confession = form.save()
+        confession = form.save(commit=False)
+        confession.user = request.user
+        confession.save()
         return redirect(self.success_url)
     
 
 class update_confession(LoginRequiredMixin, View):
     model = Confessions
-    template = "templates/confession_form.html"
+    template = "confession_form.html"
     success_url = reverse_lazy("api:all")
 
     def get(self, request, pk):
@@ -59,7 +61,7 @@ class update_confession(LoginRequiredMixin, View):
 
 class delete_confession(LoginRequiredMixin, View):
     model = Confessions
-    template = "templates/confession_delete_form.html"
+    template = "confession_delete_form.html"
     success_url = reverse_lazy("api:all")
 
     def get(self, request, pk):

@@ -8,8 +8,8 @@
     {% for confession in confessions %}
         <li>
             {{ confession.confession }}
-            (<a href="{% url 'api:confession_update' confession.id %}">Update</a>
-            <a href="{% url 'api:confession_delete' confession.id %}">Delete</a>)
+            (<a href="{% url 'api:update_confession' confession.id %}">Update</a>
+            <a href="{% url 'api:delete_confession' confession.id %}">Delete</a>)
         </li>
     {% endfor %}
 </ul>

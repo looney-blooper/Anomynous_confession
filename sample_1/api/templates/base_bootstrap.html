@@ -8,14 +8,19 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
-
+<nav class="d-flex justify-content-end mb-3">
+  {% if user.is_authenticated %}
+    <span class="me-3">Hi, {{ user.username }}</span>
+    <a href="{% url 'api:logout' %}" class="btn btn-danger btn-sm">Logout</a>
+  {% else %}
+    <a href="{% url 'api:login_page' %}" class="btn btn-primary btn-sm">Login</a>
+  {% endif %}
+</nav>
 <div class="container mt-4">
     {% block content %}
-    <!-- Content will go here -->
     {% endblock %}
 </div>
 
-<!-- Bootstrap JS (optional) -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
