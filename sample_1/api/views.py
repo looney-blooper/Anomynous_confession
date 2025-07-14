@@ -1,9 +1,12 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.views import View
+from django.contrib.auth import logout
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.urls import reverse_lazy
+from django.urls import reverse_lazy, reverse
 from .models import Confessions
 from .forms import confession_form
+
+from django.views.decorators.http import require_http_methods
 
 class home_page(View):
     def get(self,request):
@@ -73,3 +76,8 @@ class delete_confession(LoginRequiredMixin, View):
         confession = get_object_or_404(self.model, pk=pk)
         confession.delete()
         return redirect(self.success_url)
+    
+@require_http_methods(["GET","POST"])
+def logout_user(request):
+    logout(request)
+    return redirect(reverse("api:all"))

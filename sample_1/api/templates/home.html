@@ -1,20 +1,34 @@
 {% extends "base_bootstrap.html" %}
 
 {% block content %}
+  <h1 class="mb-4">Confessions</h1>
 
-<h1>Confessions</h1>
-{% if confessions %}
-<ul>
-    {% for confession in confessions %}
-        <li>
-            {{ confession.confession }}
-            (<a href="{% url 'api:update_confession' confession.id %}">Update</a>
-            <a href="{% url 'api:delete_confession' confession.id %}">Delete</a>)
+  {% if confessions %}
+    <ul class="list-group mb-4">
+      {% for confession in confessions %}
+        <li class="list-group-item d-flex justify-content-between align-items-center">
+          {{ confession.confession }}
+
+          {% if user.is_authenticated %}
+            <span>
+              <a href="{% url 'api:update_confession' confession.id %}" class="btn btn-sm btn-outline-primary me-2">Update</a>
+              <a href="{% url 'api:delete_confession' confession.id %}" class="btn btn-sm btn-outline-danger">Delete</a>
+            </span>
+          {% endif %}
         </li>
-    {% endfor %}
-</ul>
-{% else %}
-    <p>There no Confessions made...... Be the 1...by posting ur confession.....</p>
-{% endif %}
-<p><a href="{% url 'api:create_confession' %}">Make a confession</a></p>
+      {% endfor %}
+    </ul>
+  {% else %}
+    <div class="alert alert-warning" role="alert">
+      There are no confessions yet... Be the first to share one!
+    </div>
+  {% endif %}
+
+  {% if user.is_authenticated %}
+    <a href="{% url 'api:create_confession' %}" class="btn btn-success">Make a Confession</a>
+  {% else %}
+    <p>
+      <a href="{% url 'api:login_page' %}" class="btn btn-outline-primary">Login to make a confession</a>
+    </p>
+  {% endif %}
 {% endblock %}
