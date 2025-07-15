@@ -11,8 +11,8 @@
 
           {% if user.is_authenticated %}
             <span>
-              <a href="{% url 'api:update_confession' confession.id %}" class="btn btn-sm btn-outline-primary me-2">Update</a>
-              <a href="{% url 'api:delete_confession' confession.id %}" class="btn btn-sm btn-outline-danger">Delete</a>
+              <a href="{% url 'confession_app:update_confession' confession.id %}" class="btn btn-sm btn-outline-primary me-2">Update</a>
+              <a href="{% url 'confession_app:delete_confession' confession.id %}" class="btn btn-sm btn-outline-danger">Delete</a>
             </span>
           {% endif %}
         </li>
@@ -25,10 +25,10 @@
   {% endif %}
 
   {% if user.is_authenticated %}
-    <a href="{% url 'api:create_confession' %}" class="btn btn-success">Make a Confession</a>
+    <a href="{% url 'confession_app:create_confession' %}" class="btn btn-success">Make a Confession</a>
   {% else %}
     <p>
-      <a href="{% url 'api:login_page' %}" class="btn btn-outline-primary">Login to make a confession</a>
+      <a href="{% url 'confession_app:login_page' %}" class="btn btn-outline-primary">Login to make a confession</a>
     </p>
   {% endif %}
 {% endblock %}

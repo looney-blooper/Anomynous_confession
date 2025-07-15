@@ -11,9 +11,9 @@
 <nav class="d-flex justify-content-end mb-3">
   {% if user.is_authenticated %}
     <span class="me-3">Hi, {{ user.username }}</span>
-    <a href="{% url 'api:logout' %}" class="btn btn-danger btn-sm">Logout</a>
+    <a href="{% url 'confession_app:logout' %}" class="btn btn-danger btn-sm">Logout</a>
   {% else %}
-    <a href="{% url 'api:login_page' %}" class="btn btn-primary btn-sm">Login</a>
+    <a href="{% url 'confession_app:login_page' %}" class="btn btn-primary btn-sm">Login</a>
   {% endif %}
 </nav>
 <div class="container mt-4">

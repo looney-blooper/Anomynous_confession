@@ -2,7 +2,7 @@ from django.urls import path
 from django.contrib.auth import views as auth_views
 from .views import create_confession, update_confession, delete_confession, home_page, logout_user
 
-app_name = "api"
+app_name = "confession_app"
 
 urlpatterns = [
     path('home/', home_page.as_view(), name="all"),

@@ -23,7 +23,7 @@ class home_page(View):
 
 class create_confession(LoginRequiredMixin, View):
     template = "confession_form.html"
-    success_url = reverse_lazy("api:all")
+    success_url = reverse_lazy("confession_app:all")
 
     def get(self, request):
         form = confession_form()
@@ -44,7 +44,7 @@ class create_confession(LoginRequiredMixin, View):
 class update_confession(LoginRequiredMixin, View):
     model = Confessions
     template = "confession_form.html"
-    success_url = reverse_lazy("api:all")
+    success_url = reverse_lazy("confession_app:all")
 
     def get(self, request, pk):
         confession = get_object_or_404(self.model, pk=pk)
@@ -65,7 +65,7 @@ class update_confession(LoginRequiredMixin, View):
 class delete_confession(LoginRequiredMixin, View):
     model = Confessions
     template = "confession_delete_form.html"
-    success_url = reverse_lazy("api:all")
+    success_url = reverse_lazy("confession_app:all")
 
     def get(self, request, pk):
         Confession = get_object_or_404(self.model, pk=pk)
@@ -80,4 +80,4 @@ class delete_confession(LoginRequiredMixin, View):
 @require_http_methods(["GET","POST"])
 def logout_user(request):
     logout(request)
-    return redirect(reverse("api:all"))
+    return redirect(reverse("confession_app:all"))

@@ -8,7 +8,7 @@
 <form action="" method="post">
     {% csrf_token %}
     <input type="submit" value="Yes, Delete.">
-    <input type="button" onclick="window.location='{% url 'api:all' %}';" value="Cancel">
+    <input type="button" onclick="window.location='{% url 'confession_app:all' %}';" value="Cancel">
 </form>
 
 {% endblock %}

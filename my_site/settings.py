@@ -38,7 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
-    'api'
+    'confession_app'
 ]
 
 MIDDLEWARE = [
@@ -51,7 +51,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-ROOT_URLCONF = 'sample_1.urls'
+ROOT_URLCONF = 'my_site.urls'
 
 TEMPLATES = [
     {
@@ -68,7 +68,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'sample_1.wsgi.application'
+WSGI_APPLICATION = 'my_site.wsgi.application'
 
 
 # Database
@@ -125,9 +125,9 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 LOGIN_URL = 'login'
 
-LOGIN_REDIRECT_URL = '/api/home/'
+LOGIN_REDIRECT_URL = '/confession_app/home/'
 
-LOGOUT_REDIRECT_URL = '/api/home/' 
+LOGOUT_REDIRECT_URL = '/confession_app/home/' 
 
 AUTHENTICATION_BACKENDS = (
     #'social_core.backends.github.GithubOAuth2',
