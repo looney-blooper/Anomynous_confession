@@ -51,7 +51,8 @@ class update_confession(LoginRequiredMixin, View):
 
     def get(self, request, pk):
         confession = get_object_or_404(self.model, pk=pk)
-        ctx = {"confession":confession}
+        form = confession_form(instance=confession)
+        ctx = {"form": form}
         return render(request, self.template, ctx)
     
     def post(self,request,pk):

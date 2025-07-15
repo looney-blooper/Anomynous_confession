@@ -6,45 +6,84 @@
 {% block content %}
 <style>
     .landing-container {
+        position: relative;
         text-align: center;
-        padding: 80px 20px;
-        background: linear-gradient(45deg, #6a11cb, #2575fc);
-        border-radius: 25px;
+        padding: 100px 20px;
+        background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+        border-radius: 24px;
         color: white;
-        margin-top: -2rem; /* Pull it up slightly */
+        overflow: hidden;
     }
     .landing-title {
-        font-size: 3.5rem;
-        font-weight: 600;
+        font-size: 4rem;
+        font-weight: 700;
         margin-bottom: 20px;
-        text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        text-shadow: 2px 2px 8px rgba(0,0,0,0.3);
+        z-index: 2;
+        position: relative;
     }
     .landing-subtitle {
-        font-size: 1.5rem;
+        font-size: 1.6rem;
         font-weight: 300;
         margin-bottom: 40px;
+        max-width: 600px;
+        margin-left: auto;
+        margin-right: auto;
+        z-index: 2;
+        position: relative;
     }
     .btn-get-started {
         font-size: 1.2rem;
-        padding: 15px 35px;
+        padding: 18px 40px;
         border-radius: 50px;
         background-color: #ffffff;
-        color: #6a11cb;
-        font-weight: 600;
+        color: var(--primary-color);
+        font-weight: 700;
         text-transform: uppercase;
         letter-spacing: 1px;
         transition: transform 0.3s, box-shadow 0.3s;
+        z-index: 2;
+        position: relative;
     }
     .btn-get-started:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 10px 20px rgba(0,0,0,0.2);
-        color: #5e0fbb;
+        transform: translateY(-5px) scale(1.05);
+        box-shadow: 0 12px 25px rgba(0,0,0,0.2);
+        color: var(--accent-color);
+    }
+
+    /* Animated background shapes */
+    .landing-container::before, .landing-container::after {
+        content: '';
+        position: absolute;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.1);
+        animation: float 15s infinite ease-in-out;
+        z-index: 1;
+    }
+    .landing-container::before {
+        width: 200px;
+        height: 200px;
+        top: 10%;
+        left: 15%;
+    }
+    .landing-container::after {
+        width: 120px;
+        height: 120px;
+        bottom: 15%;
+        right: 10%;
+        animation-delay: 3s;
+    }
+
+    @keyframes float {
+        0% { transform: translateY(0px) translateX(0px); }
+        50% { transform: translateY(-30px) translateX(20px); }
+        100% { transform: translateY(0px) translateX(0px); }
     }
 </style>
 
 <div class="landing-container">
     <h1 class="landing-title">Welcome to Whispers</h1>
     <p class="landing-subtitle">A safe place to share your thoughts, secrets, and stories anonymously.</p>
-    <a href="{% url 'confession_app:all' %}" class="btn btn-get-started">Get Started</a>
+    <a href="{% url 'confession_app:all' %}" class="btn btn-get-started">Explore Whispers</a>
 </div>
 {% endblock %}
