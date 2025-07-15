@@ -8,6 +8,9 @@ from .forms import confession_form
 
 from django.views.decorators.http import require_http_methods
 
+def landing_page(request):
+    return render(request, 'landing_page.html')
+
 class home_page(View):
     def get(self,request):
         model = Confessions
@@ -81,3 +84,4 @@ class delete_confession(LoginRequiredMixin, View):
 def logout_user(request):
     logout(request)
     return redirect(reverse("confession_app:all"))
+

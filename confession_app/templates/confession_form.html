@@ -1,12 +1,51 @@
 {% extends "base_bootstrap.html" %}
 
+{% block title %}Share a Whisper - {{ block.super }}{% endblock %}
+
 {% block content %}
-    <form action="" method="post">
-        {% csrf_token %}
-        <table>
-            {{ form.as_table }}
-        </table>
-        <input type="submit" value="Submited">
-        <input type="button" onclick="window.location='{% url 'confession_app:all' %}';" value="Cancel">
-    </form>
+<div class="row justify-content-center">
+    <div class="col-md-8">
+        <div class="card">
+            <div class="card-header text-center">
+                <h2>{% if form.instance.pk %}Edit Your Whisper{% else %}Share Your Whisper{% endif %}</h2>
+            </div>
+            <div class="card-body p-4">
+                <form action="" method="post">
+                    {% csrf_token %}
+                    
+                    {% for field in form %}
+                    <div class="mb-3">
+                        {{ field.label_tag }}
+                        {{ field }}
+                        {% if field.help_text %}
+                        <div class="form-text">{{ field.help_text }}</div>
+                        {% endif %}
+                        {% for error in field.errors %}
+                        <div class="alert alert-danger mt-1 p-2">{{ error }}</div>
+                        {% endfor %}
+                    </div>
+                    {% endfor %}
+
+                    <div class="d-flex justify-content-end mt-4">
+                        <a href="{% url 'confession_app:all' %}" class="btn btn-secondary me-2">Cancel</a>
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    // Add bootstrap classes to form elements
+    document.addEventListener('DOMContentLoaded', function() {
+        const form = document.querySelector('form');
+        form.querySelectorAll('input, textarea, select').forEach(function(el) {
+            if (el.type !== 'submit' && el.type !== 'button' && el.type !== 'hidden' && el.type !== 'checkbox' && el.type !== 'radio') {
+                el.classList.add('form-control');
+            }
+        });
+    });
+</script>
 {% endblock %}
+

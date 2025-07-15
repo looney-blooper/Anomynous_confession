@@ -1,0 +1,50 @@
+{% extends "base_bootstrap.html" %}
+{% load static %}
+
+{% block title %}Welcome to Whispers{% endblock %}
+
+{% block content %}
+<style>
+    .landing-container {
+        text-align: center;
+        padding: 80px 20px;
+        background: linear-gradient(45deg, #6a11cb, #2575fc);
+        border-radius: 25px;
+        color: white;
+        margin-top: -2rem; /* Pull it up slightly */
+    }
+    .landing-title {
+        font-size: 3.5rem;
+        font-weight: 600;
+        margin-bottom: 20px;
+        text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+    }
+    .landing-subtitle {
+        font-size: 1.5rem;
+        font-weight: 300;
+        margin-bottom: 40px;
+    }
+    .btn-get-started {
+        font-size: 1.2rem;
+        padding: 15px 35px;
+        border-radius: 50px;
+        background-color: #ffffff;
+        color: #6a11cb;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        transition: transform 0.3s, box-shadow 0.3s;
+    }
+    .btn-get-started:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+        color: #5e0fbb;
+    }
+</style>
+
+<div class="landing-container">
+    <h1 class="landing-title">Welcome to Whispers</h1>
+    <p class="landing-subtitle">A safe place to share your thoughts, secrets, and stories anonymously.</p>
+    <a href="{% url 'confession_app:all' %}" class="btn btn-get-started">Get Started</a>
+</div>
+{% endblock %}
