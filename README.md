@@ -25,7 +25,7 @@ Make sure you have Python and pip installed on your system.
 
 1.  **Clone the repository:**
     ```sh
-    git clone <your-repository-url>
+    git clone [<your-repository-url>](https://github.com/looney-blooper/Anomynous_confession.git)
     cd sample_project_1
     ```
 
